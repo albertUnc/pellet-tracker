@@ -171,6 +171,53 @@ function exportCsv() {
   download('pellet-log.csv', ['iso_time,bags,cleaned,restarted,note', ...rows].join('\n'), 'text/csv');
 }
 
+function parseCsv(text) {
+  const rows = []; let row = [], f = '', q = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (q) { if (c === '"') { if (text[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += c; }
+    else if (c === '"') q = true;
+    else if (c === ',') { row.push(f); f = ''; }
+    else if (c === '\n' || c === '\r') {
+      if (c === '\r' && text[i + 1] === '\n') i++;
+      row.push(f); f = '';
+      if (row.some((x) => x !== '')) rows.push(row);
+      row = [];
+    } else f += c;
+  }
+  row.push(f);
+  if (row.some((x) => x !== '')) rows.push(row);
+  return rows;
+}
+
+// Accepts the same CSV/JSON that the export buttons produce (columns: iso_time,bags,cleaned,restarted,note)
+async function importFile(file) {
+  const text = (await file.text()).replace(/^\uFEFF/, '');
+  let items;
+  try {
+    if (file.name.toLowerCase().endsWith('.json') || text.trim().startsWith('[')) items = JSON.parse(text);
+    else {
+      const [head, ...rows] = parseCsv(text);
+      const h = head.map((x) => x.trim().toLowerCase());
+      items = rows.map((r) => Object.fromEntries(h.map((k, i) => [k, r[i]])));
+    }
+    if (!Array.isArray(items)) throw new Error('not a list');
+  } catch { alert(t('importBad')); return; }
+  const flag = (v) => v === true || v === 1 || ['1', 'true', 'yes', 'y'].includes(String(v).trim().toLowerCase());
+  const have = new Set(entries.map((e) => `${e.ts}|${e.bags}`));
+  let n = 0, skipped = 0;
+  for (const it of items) {
+    const ts = typeof it.ts === 'number' ? it.ts : new Date(it.iso_time ?? it.ts ?? it.time).getTime();
+    const bags = Number(it.bags);
+    const key = `${ts}|${bags}`;
+    if (!Number.isFinite(ts) || !Number.isInteger(bags) || bags < 0 || have.has(key)) { skipped++; continue; }
+    have.add(key);
+    await store.add({ ts, bags, cleaned: flag(it.cleaned), restarted: flag(it.restarted), note: String(it.note ?? '').trim() });
+    n++;
+  }
+  alert(t('importDone', { n, s: skipped }));
+}
+
 function setPreset(days) {
   if (!days) { $('#from').value = ''; $('#to').value = ''; }
   else { $('#to').value = toDateInput(Date.now()); $('#from').value = toDateInput(Date.now() - (days - 1) * S.DAY); }
@@ -240,6 +287,8 @@ async function boot() {
   $('#from').onchange = $('#to').onchange = render;
   document.querySelectorAll('[data-days]').forEach((b) => (b.onclick = () => setPreset(Number(b.dataset.days))));
   $('#btnCsv').onclick = exportCsv;
+  $('#btnImport').onclick = () => $('#importFile').click();
+  $('#importFile').onchange = async (e) => { const f = e.target.files[0]; if (f) await importFile(f); e.target.value = ''; };
   $('#btnJson').onclick = () => download('pellet-log.json', JSON.stringify(entries, null, 2), 'application/json');
   $('#btnLogout').onclick = async () => { unsub?.(); unsubSettings?.(); await store.logout(); $('#app').hidden = true; $('#login').hidden = false; };
   $('#loginForm').onsubmit = async (ev) => {

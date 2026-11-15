@@ -13,7 +13,8 @@ const dict = {
     horizon: 'Weighting horizon (days)', capacity: 'Hopper capacity (bags)', levelAfter: 'Bags in hopper right after a refill (optional)',
     kgPerBag: 'Kg per bag', defaultBags: 'Default bags per entry', exportCsv: 'Export CSV', exportJson: 'Export JSON',
     sinceClean: 'Since last cleaning', skipRestarts: 'Ignore intervals that ended with a restart in the averages', neverCleaned: 'never logged', daysUnit: 'days', chartTitle: 'Use per refill interval (bags/day)',
-    bagsUnit: 'bags', kgDay: 'kg/day', badBags: 'Bags must be a whole number (0 or more)',
+    bagsUnit: 'bags', kgDay: 'kg/day',
+    importBtn: 'Import CSV/JSON', importDone: 'Imported {n} entries ({s} skipped)', importBad: 'Could not read that file', badBags: 'Bags must be a whole number (0 or more)',
   },
   hu: {
     title: 'Pellet napló', login: 'Családi belépés', password: 'Jelszó', enter: 'Belépés', wrongPw: 'Hibás jelszó',
@@ -29,7 +30,8 @@ const dict = {
     horizon: 'Súlyozási időtáv (nap)', capacity: 'Tartály kapacitása (zsák)', levelAfter: 'Zsákok a tartályban töltés után (opcionális)',
     kgPerBag: 'Kg / zsák', defaultBags: 'Alapértelmezett zsákszám', exportCsv: 'CSV export', exportJson: 'JSON export',
     sinceClean: 'Utolsó tisztítás óta', skipRestarts: 'Az újraindítással végződő időszakok kihagyása az átlagokból', neverCleaned: 'nincs rögzítve', daysUnit: 'nap', chartTitle: 'Fogyasztás töltési időszakonként (zsák/nap)',
-    bagsUnit: 'zsák', kgDay: 'kg/nap', badBags: 'A zsákok száma egész szám legyen (0 vagy több)',
+    bagsUnit: 'zsák', kgDay: 'kg/nap',
+    importBtn: 'CSV/JSON import', importDone: '{n} bejegyzés importálva ({s} kihagyva)', importBad: 'Nem sikerült beolvasni a fájlt', badBags: 'A zsákok száma egész szám legyen (0 vagy több)',
   },
 };
 
