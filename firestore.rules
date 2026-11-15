@@ -1,0 +1,11 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Only the one shared family account may read/write.
+    // Replace the email with the same FAMILY_EMAIL you put in firebase-config.js.
+    match /{document=**} {
+      allow read, write: if request.auth != null
+                         && request.auth.token.email == 'family@pellet.local';
+    }
+  }
+}

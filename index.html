@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pellet tracker</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#c4501f">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1 data-i18n="title"></h1>
+  <div class="hdr">
+    <select id="lang"><option value="en">EN</option><option value="hu">HU</option></select>
+    <button id="btnSettings" class="ghost" type="button">⚙</button>
+    <button id="btnLogout" class="ghost" type="button" hidden data-i18n="logout"></button>
+  </div>
+</header>
+
+<section id="login" class="card narrow" hidden>
+  <h2 data-i18n="login"></h2>
+  <form id="loginForm">
+    <input id="pw" type="password" autocomplete="current-password" required data-i18n-ph="password">
+    <button data-i18n="enter"></button>
+  </form>
+  <p id="loginErr" class="err"></p>
+</section>
+
+<main id="app" hidden>
+  <p id="banner" class="banner" hidden data-i18n="localBanner"></p>
+
+  <section class="card">
+    <h2 id="formTitle" data-i18n="add"></h2>
+    <form id="entryForm">
+      <label><span data-i18n="when"></span>
+        <span class="row"><input id="ts" type="datetime-local" required>
+        <button id="btnNow" type="button" class="ghost" data-i18n="now"></button></span></label>
+      <label><span data-i18n="bags"></span>
+        <span class="row stepper">
+          <button id="bMinus" type="button" class="ghost">−</button>
+          <input id="bags" type="number" min="0" step="1" inputmode="numeric" required>
+          <button id="bPlus" type="button" class="ghost">+</button>
+        </span></label>
+      <label class="check"><input id="cleaned" type="checkbox"> <span data-i18n="cleaned"></span></label>
+      <label class="check"><input id="restarted" type="checkbox"> <span data-i18n="restarted"></span></label>
+      <label><span data-i18n="note"></span><input id="note" type="text" maxlength="300"></label>
+      <p id="formErr" class="err"></p>
+      <div class="row">
+        <button id="btnSave" data-i18n="save"></button>
+        <button id="btnCancel" type="button" class="ghost" hidden data-i18n="cancel"></button>
+      </div>
+    </form>
+  </section>
+
+  <section class="card">
+    <h2 data-i18n="stats"></h2>
+    <div class="row wrap">
+      <label><span data-i18n="from"></span><input id="from" type="date"></label>
+      <label><span data-i18n="to"></span><input id="to" type="date"></label>
+    </div>
+    <div class="row wrap presets">
+      <button type="button" class="ghost" data-days="7" data-i18n="d7"></button>
+      <button type="button" class="ghost" data-days="14" data-i18n="d14"></button>
+      <button type="button" class="ghost" data-days="30" data-i18n="d30"></button>
+      <button type="button" class="ghost" data-days="0" data-i18n="all"></button>
+    </div>
+    <dl id="statsOut" class="grid"></dl>
+    <h3 id="chartTitle" class="sub" data-i18n="chartTitle"></h3>
+    <svg id="chart" viewBox="0 0 600 150" role="img"></svg>
+  </section>
+
+  <section class="card">
+    <h2 data-i18n="history"></h2>
+    <ul id="list" class="list"></ul>
+    <div class="row wrap">
+      <button id="btnCsv" type="button" class="ghost" data-i18n="exportCsv"></button>
+      <button id="btnJson" type="button" class="ghost" data-i18n="exportJson"></button>
+    </div>
+  </section>
+</main>
+
+<dialog id="settingsDlg">
+  <form method="dialog" id="settingsForm">
+    <h2 data-i18n="settings"></h2>
+    <label><span data-i18n="horizon"></span><input id="sHorizon" type="number" min="1" step="1"></label>
+    <label><span data-i18n="capacity"></span><input id="sCapacity" type="number" min="1" step="1"></label>
+    <label><span data-i18n="levelAfter"></span><input id="sLevel" type="number" min="0" step="0.5"></label>
+    <label><span data-i18n="kgPerBag"></span><input id="sKg" type="number" min="1" step="1"></label>
+    <label><span data-i18n="defaultBags"></span><input id="sDefault" type="number" min="0" step="1"></label>
+    <label class="check"><input id="sSkip" type="checkbox"> <span data-i18n="skipRestarts"></span></label>
+    <button data-i18n="close"></button>
+  </form>
+</dialog>
+
+<script type="module" src="app.js"></script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});</script>
+</body>
+</html>
