@@ -1,7 +1,8 @@
 const dict = {
   en: {
     title: 'Pellet tracker', login: 'Family login', password: 'Password', enter: 'Enter', wrongPw: 'Wrong password',
-    logout: 'Log out', localBanner: 'Local mode: data is saved only in this browser. Fill in firebase-config.js to share it with the family.',
+    logout: 'Log out', install: 'Install', showPw: 'Show password', hidePw: 'Hide password',
+    iosHint: 'To install on iPhone: open this page in Safari, tap the Share button, then "Add to Home Screen".', localBanner: 'Local mode: data is saved only in this browser. Fill in firebase-config.js to share it with the family.',
     add: 'New entry', edit: 'Edit entry', when: 'Date & time', now: 'now', bags: 'Bags', cleaned: 'Cleaned (soot)',
     restarted: 'Restarted', note: 'Note', save: 'Save', update: 'Update', cancel: 'Cancel',
     stats: 'Statistics', from: 'From', to: 'To', d7: '7 days', d14: '14 days', d30: '30 days', all: 'All',
@@ -18,7 +19,8 @@ const dict = {
   },
   hu: {
     title: 'Pellet napló', login: 'Családi belépés', password: 'Jelszó', enter: 'Belépés', wrongPw: 'Hibás jelszó',
-    logout: 'Kilépés', localBanner: 'Helyi mód: az adatok csak ebben a böngészőben vannak. Töltsd ki a firebase-config.js-t a családi megosztáshoz.',
+    logout: 'Kilépés', install: 'Telepítés', showPw: 'Jelszó megjelenítése', hidePw: 'Jelszó elrejtése',
+    iosHint: 'iPhone-on telepítéshez: nyisd meg Safariban, koppints a Megosztás gombra, majd a „Hozzáadás a főképernyőhöz" pontra.', localBanner: 'Helyi mód: az adatok csak ebben a böngészőben vannak. Töltsd ki a firebase-config.js-t a családi megosztáshoz.',
     add: 'Új bejegyzés', edit: 'Bejegyzés szerkesztése', when: 'Dátum és idő', now: 'most', bags: 'Zsákok', cleaned: 'Tisztítva (korom)',
     restarted: 'Újraindítva', note: 'Megjegyzés', save: 'Mentés', update: 'Frissítés', cancel: 'Mégse',
     stats: 'Statisztika', from: 'Tól', to: 'Ig', d7: '7 nap', d14: '14 nap', d30: '30 nap', all: 'Mind',

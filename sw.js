@@ -1,6 +1,6 @@
 // Network-first for our own files (so updates show up immediately), cache fallback when offline.
-const CACHE = 'pellet-v1';
-const SHELL = ['./', 'index.html', 'style.css', 'app.js', 'stats.js', 'store.js', 'i18n.js', 'firebase-config.js', 'manifest.webmanifest', 'icon.svg'];
+const CACHE = 'pellet-v2';
+const SHELL = ['./', 'index.html', 'style.css', 'app.js', 'stats.js', 'store.js', 'i18n.js', 'firebase-config.js', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting()));

@@ -10,6 +10,7 @@ Last updated: 2026-11-15 by Claude
   PWA (manifest, icon.svg, sw.js) so it can be installed on phones
 - Import button (CSV/JSON, same columns as the export: iso_time,bags,cleaned,restarted,note; skips duplicates by time+bags) added 2026-11-15,
   to load the paper diary history. Plan: user uploads photos of the paper book to Claude in chat, Claude transcribes to CSV, user checks it, imports it in the app.
+- Show/hide password eye button on login; Install button (Android) + iOS how-to hint; PNG icons + apple-touch-icon + iOS meta tags (2026-11-15)
 - Firestore backend + shared-password login + firestore.rules + README setup steps are written (cloud mode not yet exercised)
 
 ## Blocked on the user (only they can do these)

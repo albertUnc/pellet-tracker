@@ -274,8 +274,36 @@ function showApp() {
   });
 }
 
+let deferredInstall = null;
+function setupInstall() {
+  if (matchMedia('(display-mode: standalone)').matches || navigator.standalone) return;
+  // Android/Chrome: real install prompt. iOS Safari has no such API, so show how-to instead.
+  window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredInstall = e; $('#btnInstall').hidden = false; });
+  window.addEventListener('appinstalled', () => { $('#btnInstall').hidden = true; });
+  $('#btnInstall').onclick = async () => {
+    if (!deferredInstall) return;
+    deferredInstall.prompt();
+    await deferredInstall.userChoice;
+    deferredInstall = null;
+    $('#btnInstall').hidden = true;
+  };
+  const ios = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  if (ios && localStorage.getItem('pellet.iosHintDismissed') !== '1') {
+    $('#iosHint').hidden = false;
+    $('#iosHintX').onclick = () => { $('#iosHint').hidden = true; localStorage.setItem('pellet.iosHintDismissed', '1'); };
+  }
+}
+
 async function boot() {
   applyLang();
+  setupInstall();
+  $('#btnEye').onclick = () => {
+    const show = $('#pw').type === 'password';
+    $('#pw').type = show ? 'text' : 'password';
+    $('#btnEye').textContent = show ? '🙈' : '👁';
+    $('#btnEye').setAttribute('aria-pressed', String(show));
+    $('#btnEye').setAttribute('aria-label', t(show ? 'hidePw' : 'showPw'));
+  };
   $('#lang').onchange = (e) => { settings.lang = e.target.value; saveSettings(); applyLang(); };
   $('#btnSettings').onclick = openSettings;
   $('#settingsDlg').addEventListener('close', closeSettings);

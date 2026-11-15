@@ -7,6 +7,11 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <meta name="theme-color" content="#c4501f">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Pellet">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,15 +19,24 @@
   <h1 data-i18n="title"></h1>
   <div class="hdr">
     <select id="lang"><option value="en">EN</option><option value="hu">HU</option></select>
+    <button id="btnInstall" class="ghost" type="button" hidden data-i18n="install"></button>
     <button id="btnSettings" class="ghost" type="button">⚙</button>
     <button id="btnLogout" class="ghost" type="button" hidden data-i18n="logout"></button>
   </div>
 </header>
 
+<div id="iosHint" class="banner hint" hidden>
+  <span data-i18n="iosHint"></span>
+  <button id="iosHintX" class="ghost" type="button" aria-label="Close">✕</button>
+</div>
+
 <section id="login" class="card narrow" hidden>
   <h2 data-i18n="login"></h2>
   <form id="loginForm">
-    <input id="pw" type="password" autocomplete="current-password" required data-i18n-ph="password">
+    <div class="row pwrow">
+      <input id="pw" type="password" autocomplete="current-password" required data-i18n-ph="password">
+      <button id="btnEye" type="button" class="ghost" aria-label="Show password" aria-pressed="false">👁</button>
+    </div>
     <button data-i18n="enter"></button>
   </form>
   <p id="loginErr" class="err"></p>

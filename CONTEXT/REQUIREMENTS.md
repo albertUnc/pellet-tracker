@@ -53,3 +53,15 @@ or similar, and more stuff. The point: log as much info as we can and calculate 
 ## Later instructions from the user (2026-11-15)
 - "you dont need to come back each time for testing, i trust that you will write good code and everything doesnt need to be tested."
 - "For now lets leave all the thermostat stuff out and when everything else is done come back to me."
+
+## Paper diary format (user answers, 2026-11-15) - needed when transcribing the old book
+- Dates are written MM/DD style (month then day), months mostly as Hungarian short names (e.g. "Nov.", "Okt."), NO years, NO time of day.
+  -> when importing: ask/assume the year(s), use a fixed time such as 12:00 for entries without a time.
+- Restart is marked with a big dot / filled circle or ellipse shape.
+- Cleaning is marked with a big "T".
+- Plan: user will upload photos of pages to Claude in chat later; Claude transcribes to a table, flags unreadable parts, user verifies,
+  then Claude writes a CSV (iso_time,bags,cleaned,restarted,note) and the user loads it with the app's Import button.
+
+## iOS install note (2026-11-15)
+- User reported "install as app" only worked on Android. Cause: iOS Safari has no install prompt API; it needs Share -> Add to Home Screen
+  and a PNG apple-touch-icon (SVG icons are ignored). Added PNG icons, iOS meta tags, an in-app Install button (Android) and a how-to hint (iOS).
