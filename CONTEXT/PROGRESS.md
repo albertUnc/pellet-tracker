@@ -14,7 +14,10 @@ Last updated: 2026-11-15 by Claude
 1. Firebase project "pellet-tracker-fbf32" exists and its web config is already in firebase-config.js (transcribed from a screenshot, so if login fails
    with an "invalid api key" error, re-copy the values from the console). Still to do by user: enable Firestore, Email/Password auth + the one family user,
    disable sign-up, publish firestore.rules (README steps 2-4, 6).
-2. Push the folder to GitHub and enable Pages.
+2. DONE 2026-11-15 by Claude: repo https://github.com/albertUnc/pellet-tracker (public, branch main) created and pushed, GitHub Pages enabled
+   -> live at https://albertunc.github.io/pellet-tracker/ (first build takes ~1-2 min).
+   Deploy = `git add -A && git commit -m "..." && git push` from the project folder. Agents: commit + push after every change.
+3. User still must add `albertunc.github.io` in Firebase -> Authentication -> Settings -> Authorized domains, and confirm Firestore is created + rules published.
 
 ## Decisions from user
 - 2026-11-15: user trusts the agent's code, does NOT want to be asked to test after each change. Work through everything and report when done.

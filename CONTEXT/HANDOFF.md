@@ -1,5 +1,12 @@
 # Handoff log (newest first). Every agent: add an entry at the TOP after each work session.
 
+## 2026-11-15 (fourth session) - Claude
+- Filled firebase-config.js with the user's web config (project pellet-tracker-fbf32); user created the shared-password account.
+- Created GitHub repo albertUnc/pellet-tracker (public: required for free Pages), pushed, enabled Pages via `gh api`.
+  Live URL: https://albertunc.github.io/pellet-tracker/ . gh CLI is logged in on the user's PC. Commit and push after every change.
+- Repo is public, so CONTEXT/ is public too: do not put secrets or personal data in it (the Firebase web config is not secret).
+
+
 ## 2026-11-15 (third session) - Claude
 - User said: trust the code, no need to come back for testing; leave ALL thermostat stuff out for now and come back when everything else is done.
 - Added: skipRestarts setting (stats.js intervalsOf/plainRate/weightedRate take a skipRestarts flag), overdue-refill warning, blue bars for restart
